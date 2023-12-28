@@ -10,9 +10,9 @@ public class CompoundOrder extends Order{
 
     public CompoundOrder() {}
 
-    public CompoundOrder(List<Product> products, float price, String state, float fees) {
-        super(products, price, state, fees);
-    }
+//    public CompoundOrder(String username,List<Product> products, float price, String state, float fees) {
+//        super(username,products, price, state, fees);
+//    }
 
 
     public void setPrice(float price) {

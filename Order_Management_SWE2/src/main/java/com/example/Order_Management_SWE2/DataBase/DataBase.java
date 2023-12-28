@@ -34,11 +34,11 @@ public class DataBase {
       List<Product> selectedProducts4 = new ArrayList<>();
       selectedProducts.add(products.get(2));selectedProducts.add(products.get(1));selectedProducts.add(products.get(0));selectedProducts.add(products.get(3));
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      orders.add(new SimpleOrder(selectedProducts,6800,"Shipped",100));
-      orders.add(new SimpleOrder(selectedProducts1,3100,"Confirmed",150));
-      orders.add(new SimpleOrder(selectedProducts2,4000,"Hold",120));
-      orders.add(new SimpleOrder(selectedProducts3,7100,"Confirmed",190));
-      orders.add(new SimpleOrder(selectedProducts4,24900,"Shipped",400));
+//      orders.add(new SimpleOrder("MariamNasr66",selectedProducts,6800,"Shipped",100));
+//      orders.add(new SimpleOrder("AyaMohamed77",selectedProducts1,3100,"Confirmed",150));
+//      orders.add(new SimpleOrder("KariemGamal33",selectedProducts2,4000,"Hold",120));
+//      orders.add(new SimpleOrder("FadyHany44",selectedProducts3,7100,"Confirmed",190));
+//      orders.add(new SimpleOrder("KarinKheir88",selectedProducts4,24900,"Shipped",400));
    }
 
    public List<Customer> getCustomers() {

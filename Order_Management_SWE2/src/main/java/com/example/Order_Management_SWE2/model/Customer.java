@@ -61,8 +61,6 @@ public class Customer {
         return balance;
     }
 
-
-
     public void setBalance(float balance) {
         this.balance = balance;
     }
