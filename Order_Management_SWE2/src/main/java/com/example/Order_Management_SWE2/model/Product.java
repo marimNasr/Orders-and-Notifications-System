@@ -4,18 +4,18 @@ public class Product {
     String SerialNum ;
     String Name;
     String Vendor;
-    Category Category;
+    Category category;
+    SubCategory subCategory;
     float Price;
-    int RemainingNum;
 
-    public Product(String serialNum, String name, String vendor, String category, float Price, int remainingNum){
+    public Product(String serialNum, String name, String vendor, Category c1,SubCategory sub, float Price){
 
-        this.SerialNum=serialNum;
-        this.Name=name;
-        this.Vendor=vendor;
-
-        this.Price=Price;
-        this.RemainingNum=remainingNum;
+        this.SerialNum = serialNum;
+        this.Name = name;
+        this.Vendor = vendor;
+        this.category = c1;
+        this.subCategory = sub;
+        this.Price = Price;
     }
 
     public String getSerialNum() {
@@ -42,12 +42,13 @@ public class Product {
         Vendor = vendor;
     }
 
-    public Category getCategory() {
-        return Category;
+    public String getCategory() {
+        return category.getCategoryName();
     }
+    public String getSubCategory() {return subCategory.getSubCategoryName();}
 
     public void setCategory(Category category) {
-        Category = category;
+        category = category;
     }
 
     public float getPrice() {
@@ -58,11 +59,4 @@ public class Product {
         Price = price;
     }
 
-    public int getRemainingNum() {
-        return RemainingNum;
-    }
-
-    public void setRemainingNum(int remainingNum) {
-        RemainingNum = remainingNum;
-    }
 }

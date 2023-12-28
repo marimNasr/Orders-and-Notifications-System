@@ -15,7 +15,6 @@ public class CustomerBSL {
         customers = dataBase.getCustomers();
         }
 
-
     public Customer get(String userName){
         for(Customer customer : customers){
             if(customer.getUserName().equals(userName))

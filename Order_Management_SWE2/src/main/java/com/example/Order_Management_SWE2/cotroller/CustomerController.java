@@ -1,19 +1,22 @@
 package com.example.Order_Management_SWE2.cotroller;
 
 import com.example.Order_Management_SWE2.BSL.CustomerBSL;
+import com.example.Order_Management_SWE2.BSL.ProductBSL;
 import com.example.Order_Management_SWE2.model.Customer;
+import com.example.Order_Management_SWE2.model.Login;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
 public class CustomerController {
     CustomerBSL customerBSL = new CustomerBSL();
+    ProductController productController = new ProductController();
 
     public CustomerController(CustomerBSL customerBSL) {
         this.customerBSL = customerBSL;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/signup")
     public String add(@RequestBody Customer customer){
         return customerBSL.add(customer);
     }
@@ -24,13 +27,7 @@ public class CustomerController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody String email, String pass) {
-        if (customerBSL.login(email, pass)) {
-            return "Login successful!";
-        } else {
-            return "Login failed. Please check your credentials.";
-        }
+    public String login(@RequestBody Login login) {
+        return login.log(login.getEmail(), login.getPass()) + productController.getListOfProducts();
     }
-
-
 }
