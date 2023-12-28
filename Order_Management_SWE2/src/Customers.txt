@@ -1,0 +1,6 @@
+[UserName]-[Email]-[Pass]-[PhoneNum]-[Address]-[Balance]
+AyaMohamed77-aya@gmail.com-123456789-01100104604-Giza-40000
+MariamNasr66-mariam@gmail.com-20211020-01102085630-Shobra-30000
+KarinKheir88-Karin@gmail.com-1357901-01278792903-Cairo-50000
+KariemGamal33-Karim@gmail.com-22821422-01148454445-Eltagmo3-30000
+FadyHany44-Fady@gmail.com-20210292-01003909994-Shobra-1000

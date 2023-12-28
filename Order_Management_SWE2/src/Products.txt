@@ -1,0 +1,10 @@
+[SerialNum]-[Name]-[Vendor]-[Category]-[Price]-[RemainingNum]
+1245-TV-Toshiba-Electronics-12000-736
+4578-Table-Elmorshdy-Furniture-1200-450
+1478-Fridge-Toshiba-Electronics-14200-630
+1489-Bed-Elmorshdy-Furniture-5600-140
+4898-Washing Machine-Toshiba-Electronics-4500-120
+4788-Fan-Toshiba-Electronics-600-300
+4565-Dinning Table-Elmorshdy-Furniture-1500-45
+1473-Vasa-Elmorshdy-Furniture-400-130
+4980-Boiler-Toshiba-Electronics-500-300
