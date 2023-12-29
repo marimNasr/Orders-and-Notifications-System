@@ -7,6 +7,7 @@ public class Product {
     Category category;
     SubCategory subCategory;
     float Price;
+    String subCategoryName;
 
     public Product(String serialNum, String name, String vendor, Category c1,SubCategory sub, float Price){
 
@@ -16,6 +17,7 @@ public class Product {
         this.category = c1;
         this.subCategory = sub;
         this.Price = Price;
+        this.subCategoryName = sub.getSubCategoryName();
     }
 
     public String getSerialNum() {

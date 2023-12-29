@@ -16,6 +16,7 @@ public class Customer {
         this.address = address;
         this.balance = balance;
     }
+    public Customer(){};
 
     public String getUserName() {
         return userName;

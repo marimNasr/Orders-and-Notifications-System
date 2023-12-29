@@ -18,7 +18,7 @@ public class OrderController {
 
 
     @PostMapping("/simpleOrder")
-    public String simpleOrder(@RequestBody Order order) {
+    public String simpleOrder(@RequestBody SimpleOrder order) {
         return simpleOrderBSL.makeSimpleOrder(order);
     }
 }

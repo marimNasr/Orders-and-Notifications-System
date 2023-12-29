@@ -9,7 +9,7 @@ import java.util.List;
 public class SimpleOrder extends Order {
     public SimpleOrder() {}
 
-    public SimpleOrder(String username, HashMap<Product, Integer> products, float price, String state, float fees) {
+    public SimpleOrder(String username, HashMap<String, Integer> products, float price, String state, float fees) {
         super(username,products, price, state, fees);
     }
 
