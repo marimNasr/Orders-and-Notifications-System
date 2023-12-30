@@ -1,7 +1,13 @@
 package com.example.Order_Management_SWE2.DataBase;
-import com.example.Order_Management_SWE2.model.*;
+import com.example.Order_Management_SWE2.Customer.model.Customer;
+import com.example.Order_Management_SWE2.Product.model.Category;
+import com.example.Order_Management_SWE2.Product.model.Product;
+import com.example.Order_Management_SWE2.Product.model.SubCategory;
+import com.example.Order_Management_SWE2.order.SimpleOrder.SimpleOrder;
+import com.example.Order_Management_SWE2.order.model.Order;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DataBase {
@@ -18,50 +24,40 @@ public class DataBase {
       customers.add(new Customer("KariemGamal33","Karim@gmail.com","22821422","01148454445","Eltagmo3",30000));
       customers.add(new Customer("FadyHany44","Fady@gmail.com","20210292","01003909994","Shobra",10000));
       /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      products.add(new Product("4578","Baby Bed","Elmorshdy",Category.CATEGORY1, SubCategory.subCATEGORY1,1200));
+      products.add(new Product("4578","Baby Bed","Elmorshdy", Category.CATEGORY1, SubCategory.subCATEGORY1,1200));
       products.add(new Product("1489","Master Bed","Elmorshdy",Category.CATEGORY1,SubCategory.subCATEGORY1,5600));
       products.add(new Product("4565","Dinning Table","Elmorshdy",Category.CATEGORY1,SubCategory.subCATEGORY3,1500));
       products.add(new Product("1473","Vase","Elmorshdy",Category.CATEGORY1,SubCategory.subCATEGORY2,400));
-      //Products of orders/////////////////////////////////////////////////////////////////////////////////////////////////////////
-      List<Product> selectedProducts = new ArrayList<>();
-      selectedProducts.add(products.get(0));selectedProducts.add(products.get(1));
-      List<Product> selectedProducts1 = new ArrayList<>();
-      selectedProducts.add(products.get(0));selectedProducts.add(products.get(2));selectedProducts.add(products.get(3));
-      List<Product> selectedProducts2 = new ArrayList<>();
-      selectedProducts.add(products.get(1));selectedProducts.add(products.get(3));
-      List<Product> selectedProducts3 = new ArrayList<>();
-      selectedProducts.add(products.get(2));selectedProducts.add(products.get(1));
-      List<Product> selectedProducts4 = new ArrayList<>();
-      selectedProducts.add(products.get(2));selectedProducts.add(products.get(1));selectedProducts.add(products.get(0));selectedProducts.add(products.get(3));
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//      orders.add(new SimpleOrder("MariamNasr66",selectedProducts,6800,"Shipped",100));
-//      orders.add(new SimpleOrder("AyaMohamed77",selectedProducts1,3100,"Confirmed",150));
-//      orders.add(new SimpleOrder("KariemGamal33",selectedProducts2,4000,"Hold",120));
-//      orders.add(new SimpleOrder("FadyHany44",selectedProducts3,7100,"Confirmed",190));
-//      orders.add(new SimpleOrder("KarinKheir88",selectedProducts4,24900,"Shipped",400));
+//      Products of orders/////////////////////////////////////////////////////////////////////////////////////////////////////////
+      HashMap<String, Integer> products = new HashMap<>();
+      products.put("Baby Bed",10);
+      HashMap<String, Integer> products2 = new HashMap<>();
+      products.put("Master Bed",10);
+      HashMap<String, Integer> products3 = new HashMap<>();
+      products.put("Dinning Table",10);
+      HashMap<String, Integer> products4 = new HashMap<>();
+      products.put("Vase",10);
+//   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      orders.add(new SimpleOrder("MariamNasr66", products,6800,"Shipped",100));
+      orders.add(new SimpleOrder("AyaMohamed77",products2,3100,"Confirmed",150));
+      orders.add(new SimpleOrder("KariemGamal33",products3,4000,"Hold",120));
+      orders.add(new SimpleOrder("FadyHany44",products3,7100,"Confirmed",190));
+      orders.add(new SimpleOrder("KarinKheir88",products4,24900,"Shipped",400));
    }
 
    public List<Customer> getCustomers() {
       return customers;
    }
 
-   public void addCustomer(Customer c) {
-      customers.add(c);
-   }
 
-   public void setOrders(List<Order> orders) {
-      this.orders = orders;
-   }
 
-   public void setProducts(List<Product> products) {
-      this.products = products;
-   }
 
    public List<Product> getProducts() {
       return products;
    }
-
-   public List<Order> getOrders() {
+   public List<Order> getOrders(){
       return orders;
    }
+
+
 }
