@@ -6,7 +6,8 @@ import com.example.Order_Management_SWE2.order.model.Order;
 import java.util.Map;
 
 public class ArPlaceMessage extends PlaceMessage {
-    public String SendM(Order order) {
+    @Override
+    public String createMessages(Order order) {
         String Temp = "";
         msg = "";
         msg = msg + "عميلنا العزيز " ;
@@ -24,7 +25,7 @@ public class ArPlaceMessage extends PlaceMessage {
         msg = msg + order.getId();
         if (order instanceof CompoundOrder) {
             for (Order o : ((CompoundOrder) order).getOrders()) {
-                msg += "\n" + SendM(o);
+                 msg+="\n"+createMessages(o);
             }
         }
         return msg;

@@ -27,6 +27,10 @@ public class CustomerController {
 
     @PostMapping("/login")
     public String login(@RequestBody Login login) {
-        return login.log(login.getEmail(), login.getPass()) + productController.getListOfProducts();
+        String loginValidation =login.log(login.getEmail(), login.getPass());
+        if(loginValidation .equals("Login successful!")){
+             return loginValidation + productController.getListOfProducts();
+        }
+        return loginValidation;
     }
 }

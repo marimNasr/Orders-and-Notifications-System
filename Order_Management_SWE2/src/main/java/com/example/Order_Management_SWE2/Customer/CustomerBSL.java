@@ -28,6 +28,9 @@ public class CustomerBSL {
                 return "this user name already exists";
         }
         databaseController.addCustomer(customer);
+        for(int i = 0; i < dataBase.getCustomers().size(); i++) {
+            System.out.println(dataBase.getCustomers().get(i).getUserName());
+        }
         return "user added successfully";
     }
 

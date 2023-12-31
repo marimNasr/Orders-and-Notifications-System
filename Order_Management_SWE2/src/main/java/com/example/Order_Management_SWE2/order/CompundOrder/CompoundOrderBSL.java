@@ -1,6 +1,8 @@
 package com.example.Order_Management_SWE2.order.CompundOrder;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+
+import com.example.Order_Management_SWE2.Customer.model.Customer;
+import com.example.Order_Management_SWE2.Product.model.Product;
 import com.example.Order_Management_SWE2.DataBase.DatabaseController;
 import com.example.Order_Management_SWE2.Payment.PaymentBSL;
 import com.example.Order_Management_SWE2.Product.ProductBSL;
@@ -8,15 +10,11 @@ import com.example.Order_Management_SWE2.order.SimpleOrder.SimpleOrder;
 import com.example.Order_Management_SWE2.order.model.Order;
 import com.example.Order_Management_SWE2.order.model.OrderState;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class CompoundOrderBSL {
     DatabaseController DBController= new DatabaseController();
     ProductBSL productBSL = new ProductBSL();
     PaymentBSL paymentBSL = new PaymentBSL();
-    HashMap<String, Integer> products = new HashMap<>();
+    Map<String, Integer> products = new HashMap<>();
     List<SimpleOrder> orders = new ArrayList<>();
     String friendsName = "";
 
@@ -31,19 +29,17 @@ public class CompoundOrderBSL {
         if(myOrder && friendsName == ""){
             order.setState(OrderState.placed);
             DBController.addOrder(order);
-//            order.setPlaceTime();
+            order.setPlaceTime();
             Timer timer = new Timer(true);
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    // This code will be executed after 2 seconds
                     order.setState(OrderState.shipping);
                     order.setShipTime();
                     System.out.println("Order" + " has been shipped.");
-                    // Additional logic can be added here if needed
-                    timer.cancel(); // Cancel the timer after executing the task
+                    timer.cancel();
                 }
-            }, 60000);
+            }, 120000);
             for (SimpleOrder simOrder : orders) {
                 simOrder.setState(OrderState.placed);
                 DBController.addOrder(simOrder);
@@ -54,8 +50,8 @@ public class CompoundOrderBSL {
     }
     public boolean orderValidation(Order order){
         boolean x = false;
-        products = (HashMap<String, Integer>) order.getProducts();
-        for(HashMap.Entry<String, Integer> entry : products.entrySet()) {
+        products = order.getProducts();
+        for(Map.Entry<String, Integer> entry : products.entrySet()) {
             boolean productEnough = productBSL.ifProductEnough(entry.getKey(), entry.getValue());
             boolean pay = paymentBSL.paySimpleOrder(order, order.getUsername(), DBController);
             if(productEnough && pay){
@@ -67,28 +63,75 @@ public class CompoundOrderBSL {
         }
         return x;
     }
-//    public void cancelPlacement(Order order){
-//
-//    }
-//
-//
-//    public String cancel(SimpleOrder order){
-//        long currentTime = System.currentTimeMillis();
-//        long elapsedTime = currentTime - order.getPlaceTime();
-//        long placeCancellationTime = 120000; // 2 minute in milliseconds
-//        if (elapsedTime <= placeCancellationTime) {
-//            cancelPlacement(order);
-//            return "Order Placement cancelled successfully";
-//        }
-//        if(order.getState().equals(OrderState.shipping)){
-//            long elapsedTime2 = currentTime - order.getShipTime();
-//            long shipCancellationTime = 60000; // 2 minute in milliseconds
-//            if(elapsedTime2 <= shipCancellationTime){
-//                cancelShipment(order);
-//                return "Order Shipment cancelled successfully";
-//            }
-//        }
-//        return "Order cannot be cancelled";
-//    }
+
+    public void returnProducts(Order order){
+        products = order.getProducts();
+        for(Map.Entry<String, Integer> entry : products.entrySet()) {
+            Product product = productBSL.getProduct(entry.getKey());
+            productBSL.increaseQuantity(product,entry.getValue());
+            product.getSubCategory().setCounter(product.getSubCategory().getCounter() + entry.getValue());
+        }
+
+    }
+    public void cancelPlacement(CompoundOrder order){
+        returnProducts(order);
+        float price = order.getPrice();
+        float fees = order.getFees();
+        String name = order.getUsername();
+        Customer customer = DBController.getUser(name);
+        customer.setBalance(customer.getBalance() + price + fees);
+        orders = order.getOrders();
+        for(Order Order : orders) {
+            returnProducts(Order);
+            price = Order.getPrice();
+            fees = Order.getFees();
+            name = Order.getUsername();
+            customer = DBController.getUser(name);
+            customer.setBalance(customer.getBalance() + price + fees);
+            orders.remove(Order);
+            System.out.println(name+ " has been returned");
+
+        }
+        orders.remove(order);
+
+    }
+
+    public void cancelShipment(CompoundOrder order){
+        order.setState(OrderState.placed);
+        String name = order.getUsername();
+        Customer customer = DBController.getUser(name);
+        float fees = order.getFees();
+        customer.setBalance(customer.getBalance()+ fees);
+        orders = order.getOrders();
+        for(Order Order : orders) {
+            Order.setState(OrderState.placed);
+            name = Order.getUsername();
+            customer = DBController.getUser(name);
+            fees = Order.getFees();
+            customer.setBalance(customer.getBalance()+ fees);
+            System.out.println(name+ " has been returned");
+        }
+    }
+    public String cancel(int  orderId){
+        CompoundOrder order = (CompoundOrder) DBController.getOrder(orderId);
+        long currentTime = System.currentTimeMillis();
+        long elapsedTime = currentTime - order.getPlaceTime();
+        long placeCancellationTime = 120000; // 2 minute in milliseconds
+
+
+        if (elapsedTime <= placeCancellationTime) {
+            cancelPlacement(order);
+            return "Order Placement cancelled successfully";
+        }
+        if(order.getState()==OrderState.shipping){
+            long elapsedTime2 = currentTime - order.getShipTime();
+            long shipCancellationTime = 60000; // 2 minute in milliseconds
+            if(elapsedTime2 <= shipCancellationTime){
+                cancelShipment(order);
+                return "Order Shipment cancelled successfully";
+            }
+        }
+        return "Order cannot be cancelled";
+    }
 
 }

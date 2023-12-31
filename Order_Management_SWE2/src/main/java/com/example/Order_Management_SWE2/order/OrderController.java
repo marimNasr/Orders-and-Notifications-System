@@ -24,10 +24,15 @@ public class OrderController {
         return CompOrderBSL.makeCompoundOrder(Order);
     }
 
-    @PostMapping("/cancelOrder/{orderId}")
-    public String cancelOrder(@PathVariable("orderId") int orderId) {
+    @PostMapping("/cancelSimpleOrder/{orderId}")
+    public String cancelSimpleOrder(@PathVariable("orderId") int orderId) {
 
             return simpleOrderBSL.cancel(orderId);
     }
+    @PostMapping("/cancelCompoundOrder/{orderId}")
+    public String cancelCompoundOrder(@PathVariable("orderId") int orderId) {
+        return CompOrderBSL.cancel(orderId);
+    }
+
 
 }

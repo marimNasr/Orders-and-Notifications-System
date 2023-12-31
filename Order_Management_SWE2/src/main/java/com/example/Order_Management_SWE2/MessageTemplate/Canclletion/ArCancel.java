@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ArCancel extends CancelMessage{
     @Override
-    public String SendM(Order order) { //cancel order
+    public String createMessages(Order order) { //cancel order
         String orderID = Integer.toString(order.getId());
         String customerName = order.getUsername();
         String products = "";

@@ -18,11 +18,11 @@ public class OrderManagementSwe2Application {
 		System.out.println("Hello World!");
 		SpringApplication.run(OrderManagementSwe2Application.class, args);
 //		DataBase d = new DataBase();
-//		PlaceMessage p = new ArPlaceMessage();
+//		PlaceMessage p = new EnPlaceMessage();
 //		ShipmentMessage s = new EnShipMessage();
 //		CancelMessage c = new EnCancel();
 ////		System.out.println(c.SendM(d.getOrders().get(0)));
-//		System.out.println(p.SendM(d.getOrders().get(0)));
+//		System.out.println(p.createMessages(d.getOrders().get(0)));
 
 //		CustomerBSL customerBSL = new CustomerBSL();
 //		CustomerController customerController = new CustomerController(customerBSL);

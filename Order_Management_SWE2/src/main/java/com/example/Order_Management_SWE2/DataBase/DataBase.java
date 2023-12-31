@@ -14,23 +14,23 @@ import java.util.List;
 import java.util.Map;
 
 public class DataBase {
-   private List<Customer> customers = new ArrayList<Customer>();
+   private static List<Customer> customers = new ArrayList<Customer>();
    private List<Order> orders = new ArrayList<Order>();
    private List<Product> products= new ArrayList<Product>();
    // get prducts map
    @Getter
    private static Map<Product, Integer> productsMap = new HashMap<Product, Integer>();
-   HashMap<String, Integer> product = new HashMap<>();
+  HashMap<String, Integer> product = new HashMap<>();
    private ArrayList<SimpleOrder> order = new ArrayList<SimpleOrder>();
 
    public DataBase(){
 
 
-      customers.add(new Customer("AyaMohamed77","aya@gmail.com","123456789","01100104604","Giza",40000,"Ar","email"));
-      customers.add(new Customer("MariamNasr66","mariam@gmail.com","20211020","01102085630","Shobra",30000,"En","email"));
+      customers.add(new Customer("AyaMohamed77","aya@gmail.com","123456789","01100104604","Giza",40000,"Ar","Email"));
+      customers.add(new Customer("MariamNasr66","mariam@gmail.com","20211020","01102085630","Shobra",30000,"En","SMS"));
       customers.add(new Customer("KarinKheir88","Karin@gmail.com","1357901","01278792903","Cairo",50000,"Ar","SMS"));
       customers.add(new Customer("KariemGamal33","Karim@gmail.com","22821422","01148454445","Eltagmo3",30000,"En","SMS"));
-      customers.add(new Customer("FadyHany44","Fady@gmail.com","20210292","01003909994","Shobra",10000,"Ar","email"));
+      customers.add(new Customer("FadyHany44","Fady@gmail.com","20210292","01003909994","Shobra",10000,"Ar","Email"));
       /////////////////////////////////////////////////////////////////////////////////////////////////////////////
       Product product1 =new Product("4578","Baby Bed","Elmorshdy", Category.CATEGORY1, SubCategory.subCATEGORY1,1200);
       Product product2 =new Product("1489","Master Bed","Elmorshdy",Category.CATEGORY1,SubCategory.subCATEGORY1,5600);
@@ -45,12 +45,12 @@ public class DataBase {
       productsMap.put(product2,10);
       productsMap.put(product3,10);
       productsMap.put(product4,10);
-//      product.put("Baby Bed" ,10);
-//      product.put("Master Bed" ,10);
-//   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//      order.add(new SimpleOrder("MariamNasr66", product,6800,100));
-//      order.add(new SimpleOrder("AyaMohamed77",product,3100,150));
-//      orders.add(new CompoundOrder("KariemGamal33",product,3100,150,order));
+      product.put("Baby Bed" ,10);
+      product.put("Master Bed" ,10);
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      order.add(new SimpleOrder(123,"MariamNasr66", product,6800,100));
+      order.add(new SimpleOrder(234,"AyaMohamed77",product,3100,150));
+      orders.add(new CompoundOrder(459,"KariemGamal33",product,3100,150,order));
 
 //      orders.add(new SimpleOrder("KariemGamal33",products3,4000,"Hold",120));
 //      orders.add(new SimpleOrder("FadyHany44",products3,7100,"Confirmed",190));

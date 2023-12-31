@@ -6,9 +6,8 @@ import com.example.Order_Management_SWE2.order.model.Order;
 
 import java.util.HashMap;
 
-public abstract class ShipmentMessage implements MessageTemplate {
+public abstract class ShipmentMessage extends MessageTemplate {
     String Username;
-    String msg;
     private HashMap<String, Integer> products;
 
 
@@ -23,5 +22,5 @@ public abstract class ShipmentMessage implements MessageTemplate {
     public HashMap<String, Integer> getProducts(){
         return   products;
     }
-    public abstract String SendM(Order order);
+
 }

@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class EnCancel extends CancelMessage{
     @Override
-    public String SendM(Order order){ //cancel order
+    public String createMessages(Order order){ //cancel order
         String orderID = Integer.toString(order.getId());
         String customerName = order.getUsername();
         String products = "";
@@ -33,8 +33,6 @@ public class EnCancel extends CancelMessage{
                 }
             }
         }
-
-        String msg;
         msg = "Dear " + customerName + ", your order with ID: " + orderID + " and its products:\n"
                 + products + " is canceled";
         return msg;
@@ -43,7 +41,7 @@ public class EnCancel extends CancelMessage{
     public String SendMShipment(Order order){
         String orderID = Integer.toString(order.getId());
         String customerName = order.getUsername();
-        String msg;
+
         msg = "Dear " + customerName + ", your order shipment with ID: " + orderID + " is canceled";
         return msg;
     }

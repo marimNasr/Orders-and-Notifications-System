@@ -4,7 +4,7 @@ import com.example.Order_Management_SWE2.order.model.Order;
 
 public class ArShipMessage extends ShipmentMessage{
     @Override
-    public String SendM(Order order) {
+    public String createMessages(Order order) {
         getThings(order);
         double total_price = order.getPrice()+order.getFees();
         this.msg=" ";
