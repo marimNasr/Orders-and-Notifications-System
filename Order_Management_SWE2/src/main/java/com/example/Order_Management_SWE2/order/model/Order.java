@@ -8,14 +8,16 @@ public abstract class Order {
     int ID;
     Map<String,Integer> products;
     float price;
-    String state;
+    OrderState state;
     float Fees;
     String username;
+    long placeTime;
+    long shipTime;
+
     public Order() {}
 
-    public Order(String username, HashMap<String, Integer> items, float price, String state, float fees) {
+    public Order(String username, Map<String, Integer> items, float price, float fees) {
         this.price = price;
-        this.state = state;
         this.Fees = fees;
         this.username = username;
         this.products = items;
@@ -25,23 +27,15 @@ public abstract class Order {
         return ID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public void setFees(float fees) {
-        Fees = fees;
-    }
-
     public float getFees() {
         return Fees;
     }
 
     public Map<String, Integer> getProducts() {
-        return (HashMap<String, Integer>) products;
+        return products;
     }
 
-    public void setProducts(HashMap<String, Integer> products) {
+    public void setProducts(Map<String, Integer> products) {
         this.products = products;
     }
 
@@ -50,8 +44,28 @@ public abstract class Order {
     }
 
 
-
     public String getUsername(){
       return username;
     }
+
+    public OrderState getState() {
+        return state;
+    }
+
+    public void setState(OrderState state) {
+        this.state = state;
+    }
+    public long getPlaceTime() {
+        return placeTime;
+    }
+    public void setPlaceTime() {
+        this.placeTime = System.currentTimeMillis();
+    }
+    public long getShipTime() {
+        return shipTime;
+    }
+    public void setShipTime() {
+        this.shipTime = System.currentTimeMillis();
+    }
+
 }

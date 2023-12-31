@@ -19,6 +19,7 @@ public class Product {
         this.Price = Price;
         this.subCategoryName = sub.getSubCategoryName();
     }
+    public Product(){}; // default constructor
 
     public String getSerialNum() {
         return SerialNum;

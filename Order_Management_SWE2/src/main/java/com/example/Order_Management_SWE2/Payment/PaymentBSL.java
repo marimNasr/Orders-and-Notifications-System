@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaymentBSL {
     public boolean paySimpleOrder(Order order, String username, DatabaseController DBController) {
-        if(DBController.getUser(username)==null) {
+        if(DBController.getUser(username) == null) {
             return false;
         }
         Customer customer = DBController.getUser(username);

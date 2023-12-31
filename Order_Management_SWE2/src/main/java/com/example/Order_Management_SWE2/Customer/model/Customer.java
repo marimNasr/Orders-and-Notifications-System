@@ -7,16 +7,31 @@ public class Customer {
     private String phoneNum;
     private String address;
     private float balance;
+    private String language;
 
-    public Customer(String userName, String email, String pass, String phoneNum, String address, float balance){
+
+    private String notificationType;
+
+    public Customer(String userName, String email, String pass, String phoneNum, String address,
+                    float balance, String language, String notificationType){
         this.userName = userName;
         this.email = email;
         this.pass = pass;
         this.phoneNum = phoneNum;
         this.address = address;
         this.balance = balance;
+        this.language = language;
+        this.notificationType = notificationType;
     }
+
     public Customer(){};
+
+    public String getLanguage() {
+        return language;
+    }
+    public String getNotificationType() {
+        return notificationType;
+    }
 
     public String getUserName() {
         return userName;

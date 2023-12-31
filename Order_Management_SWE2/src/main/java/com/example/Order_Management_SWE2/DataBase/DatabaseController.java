@@ -25,5 +25,10 @@ public class DatabaseController
     public void addOrder(Order order){
         orders.add(order);
     }
+    public void displayOrders(){
+        for(Order order : orders){
+            System.out.println(order.getUsername());
+        }
+    }
 
 }

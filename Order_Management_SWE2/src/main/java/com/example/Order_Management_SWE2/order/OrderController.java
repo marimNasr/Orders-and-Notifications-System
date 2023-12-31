@@ -21,9 +21,9 @@ public class OrderController {
 
         return simpleOrderBSL.makeSimpleOrder(order);
     }
-    @PostMapping("/compoundOrder")
-    public String compoundOrder(@RequestBody CompoundOrder Order) {
-
-        return CompOrderBSL.makeCompoundOrder(Order);
-    }
+//    @PostMapping("/compoundOrder")
+//    public String compoundOrder(@RequestBody CompoundOrder Order) {
+//
+//        return CompOrderBSL.makeCompoundOrder(Order);
+//    }
 }

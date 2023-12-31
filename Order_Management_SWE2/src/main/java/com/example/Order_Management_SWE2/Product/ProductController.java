@@ -14,7 +14,4 @@ public class ProductController {
     public String getListOfProducts() {
         return listOfProducts;}
 
-    public void setListOfProducts(String listOfProducts) {
-        this.listOfProducts = listOfProducts;
-    }
 }

@@ -7,11 +7,16 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CompoundOrder extends Order {
+
     public List<SimpleOrder> orders;
 
-    public CompoundOrder(List<SimpleOrder> orders){
-            this.orders = orders;
+    public CompoundOrder(String username, HashMap<String, Integer> products, float price, float fees, List<SimpleOrder> orders){
+        super(username, products, price, fees);
+        this.orders = orders;
 
     }
 
+    public List<SimpleOrder> getOrders() {
+        return orders;
+    }
 }

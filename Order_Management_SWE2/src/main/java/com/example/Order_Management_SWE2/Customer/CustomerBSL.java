@@ -19,11 +19,7 @@ public class CustomerBSL {
         }
 
     public Customer get(String userName){
-        for(Customer customer : customers){
-            if(customer.getUserName().equals(userName))
-                return customer;
-        }
-        return null;
+        return databaseController.getUser(userName);
     }
     //sign up
     public String add(Customer customer){
