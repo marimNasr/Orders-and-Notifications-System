@@ -10,8 +10,8 @@ public class CompoundOrder extends Order {
 
     public List<SimpleOrder> orders;
 
-    public CompoundOrder(String username, HashMap<String, Integer> products, float price, float fees, List<SimpleOrder> orders){
-        super(username, products, price, fees);
+    public CompoundOrder(int id,String username, HashMap<String, Integer> products, float price, float fees, List<SimpleOrder> orders){
+        super(id,username, products, price, fees);
         this.orders = orders;
 
     }

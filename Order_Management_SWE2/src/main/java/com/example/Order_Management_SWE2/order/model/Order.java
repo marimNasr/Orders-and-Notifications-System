@@ -1,11 +1,10 @@
 package com.example.Order_Management_SWE2.order.model;
 
 
-import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Order {
-    int ID;
+    int id;
     Map<String,Integer> products;
     float price;
     OrderState state;
@@ -16,15 +15,17 @@ public abstract class Order {
 
     public Order() {}
 
-    public Order(String username, Map<String, Integer> items, float price, float fees) {
+    public Order(int id,String username, Map<String, Integer> items, float price, float fees) {
+        this.id = id;
         this.price = price;
         this.Fees = fees;
         this.username = username;
         this.products = items;
+
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
     public float getFees() {

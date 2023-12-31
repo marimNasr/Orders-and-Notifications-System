@@ -9,7 +9,7 @@ public class EnShipMessage extends ShipmentMessage{
         getThings(order);
         this.msg ="";
         msg+="Dear"+order.getUsername();
-        msg+="Your order with ID :"+order.getID() +"has been shipped '\n'";
+        msg+="Your order with ID :"+order.getId() +"has been shipped '\n'";
         msg+="and the total cost for the order is" +total_price;
         return msg;
     }

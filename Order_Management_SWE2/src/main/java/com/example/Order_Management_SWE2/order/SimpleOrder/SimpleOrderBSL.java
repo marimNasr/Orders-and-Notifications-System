@@ -1,6 +1,5 @@
 package com.example.Order_Management_SWE2.order.SimpleOrder;
 import java.util.*;
-
 import com.example.Order_Management_SWE2.Customer.model.Customer;
 import com.example.Order_Management_SWE2.DataBase.DataBase;
 import com.example.Order_Management_SWE2.DataBase.DatabaseController;
@@ -10,18 +9,22 @@ import com.example.Order_Management_SWE2.order.model.Order;
 import com.example.Order_Management_SWE2.order.model.OrderState;
 import org.springframework.stereotype.Service;
 import com.example.Order_Management_SWE2.Product.model.Product;
+import java.text.SimpleDateFormat;
 
 @Service
 public class SimpleOrderBSL {
     DatabaseController DBController= new DatabaseController();
     ProductBSL productBSL = new ProductBSL();
     PaymentBSL paymentBSL = new PaymentBSL();
-    HashMap<String, Integer> products = new HashMap<>();
+    Map<String, Integer> products = new HashMap<String, Integer>();
     DataBase dataBase = new DataBase();
 
-    Map<Product,Integer> productsMap = dataBase.getProductsMap();
+    Map<Product,Integer> productsMap;
     List<Order> orders = dataBase.getOrders();
 
+    public SimpleOrderBSL(){
+        productsMap= dataBase.getProductsMap();
+    }
    public String makeSimpleOrder(SimpleOrder order){
        boolean x = false;
         products = (HashMap<String, Integer>) order.getProducts();
@@ -39,7 +42,12 @@ public class SimpleOrderBSL {
         if(x){
             order.setState(OrderState.placed);
             DBController.addOrder(order);
+//            long currentTime = System.currentTimeMillis();
+//            System.out.println("sda");
+//            System.out.println(currentTime);
+
             order.setPlaceTime();
+            System.out.println(order.getPlaceTime());
             Timer timer = new Timer(true);
             timer.schedule(new TimerTask() {
                 @Override
@@ -51,7 +59,7 @@ public class SimpleOrderBSL {
                 }
             }, 120000);
 //            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String formattedOrderTime = dateFormat.format(new Date(order.getTime()));
+//            String formattedOrderTime = dateFormat.format(new Date(order.getPlaceTime()));
 //            // Print the formatted order time
 //            System.out.println("Order placed at: " + formattedOrderTime);
             return "Order is done";
@@ -60,12 +68,13 @@ public class SimpleOrderBSL {
    }
 
    public void cancelPlacement(SimpleOrder order){
-       products = (HashMap<String, Integer>) order.getProducts();
+       products =  order.getProducts();
        for(HashMap.Entry<String, Integer> entry : products.entrySet()) {
             Product product = productBSL.getProduct(entry.getKey());
             product.getSubCategory().setCounter(product.getSubCategory().getCounter() + entry.getValue());
-            productsMap.put(product,productsMap.get(product) + entry.getValue());
+            productBSL.increaseQuantity(product,entry.getValue());
        }
+
 
        float price = order.getPrice();
        float fees = order.getFees();
@@ -84,15 +93,38 @@ public class SimpleOrderBSL {
        customer.setBalance(customer.getBalance()+ fees);
    }
 
-   public String cancel(SimpleOrder order){
+   public String cancel(int  orderId){
+       SimpleOrder order = (SimpleOrder) DBController.getOrder(orderId);
+
        long currentTime = System.currentTimeMillis();
+       System.out.println("hna");
+       System.out.println(currentTime);
+       System.out.println(order.getPlaceTime());
+
        long elapsedTime = currentTime - order.getPlaceTime();
        long placeCancellationTime = 120000; // 2 minute in milliseconds
+
+//       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//       String formattedOrderTime = dateFormat.format(new Date(currentTime));
+//       // Print the formatted order time
+//       System.out.println("current time : " + formattedOrderTime);
+//       SimpleDateFormat dateFormat0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//       String formattedOrderTime0 = dateFormat0.format(new Date(order.getPlaceTime()));
+//       // Print the formatted order time
+//       System.out.println("get place time : " + formattedOrderTime0);
+//
+//       SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//       String formattedOrderTime2 = dateFormat2.format(new Date(elapsedTime));
+//       // Print the formatted order time
+//       System.out.println("elapsed time: " + formattedOrderTime2);
+
+
+
        if (elapsedTime <= placeCancellationTime) {
            cancelPlacement(order);
            return "Order Placement cancelled successfully";
        }
-       if(order.getState().equals(OrderState.shipping)){
+       if(order.getState()==OrderState.shipping){
            long elapsedTime2 = currentTime - order.getShipTime();
            long shipCancellationTime = 60000; // 2 minute in milliseconds
            if(elapsedTime2 <= shipCancellationTime){

@@ -10,7 +10,7 @@ import java.util.Map;
 public class EnCancel extends CancelMessage{
     @Override
     public String SendM(Order order){ //cancel order
-        String orderID = Integer.toString(order.getID());
+        String orderID = Integer.toString(order.getId());
         String customerName = order.getUsername();
         String products = "";
         Map<String, Integer> items = order.getProducts();
@@ -41,7 +41,7 @@ public class EnCancel extends CancelMessage{
     }
 
     public String SendMShipment(Order order){
-        String orderID = Integer.toString(order.getID());
+        String orderID = Integer.toString(order.getId());
         String customerName = order.getUsername();
         String msg;
         msg = "Dear " + customerName + ", your order shipment with ID: " + orderID + " is canceled";

@@ -1,10 +1,8 @@
 package com.example.Order_Management_SWE2.MessageTemplate.Placement;
 
-import com.example.Order_Management_SWE2.Product.model.Product;
 import com.example.Order_Management_SWE2.order.CompundOrder.CompoundOrder;
 import com.example.Order_Management_SWE2.order.model.Order;
 
-import java.util.List;
 import java.util.Map;
 
 public class ArPlaceMessage extends PlaceMessage {
@@ -23,7 +21,7 @@ public class ArPlaceMessage extends PlaceMessage {
         msg = msg +products;
         msg = msg+ "بنجاح ";
         msg = msg + "ويحمل الرقم التعريفي ";
-        msg = msg + order.getID();
+        msg = msg + order.getId();
         if (order instanceof CompoundOrder) {
             for (Order o : ((CompoundOrder) order).getOrders()) {
                 msg += "\n" + SendM(o);

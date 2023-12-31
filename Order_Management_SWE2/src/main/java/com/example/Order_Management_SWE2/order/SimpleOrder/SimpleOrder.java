@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class SimpleOrder extends Order {
     public SimpleOrder() {}
 
-    public SimpleOrder(String username, HashMap<String, Integer> products, float price, float fees) {
-        super(username, products, price, fees);
+    public SimpleOrder(int id,String username, HashMap<String, Integer> products, float price, float fees) {
+        super(id,username, products, price, fees);
     }
 
 }

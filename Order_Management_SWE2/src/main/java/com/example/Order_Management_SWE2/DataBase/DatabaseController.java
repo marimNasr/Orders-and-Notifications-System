@@ -18,7 +18,14 @@ public class DatabaseController
         }
         return null;
     }
-
+    public Order getOrder(int id){
+        for(Order order : orders){
+            if(order.getId() == id) {
+                return order;
+            }
+        }
+        return null;
+    }
     public void addCustomer(Customer c) {
         customers.add(c);
     }

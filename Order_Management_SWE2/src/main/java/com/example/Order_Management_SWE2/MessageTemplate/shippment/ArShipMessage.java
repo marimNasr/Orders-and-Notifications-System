@@ -9,7 +9,7 @@ public class ArShipMessage extends ShipmentMessage{
         double total_price = order.getPrice()+order.getFees();
         this.msg=" ";
         msg+="عميلنا العزيز" + order.getUsername();
-        msg+=" طلبك الذى يحمل الرقم التعريفى '\n'  "+order.getID() ;
+        msg+=" طلبك الذى يحمل الرقم التعريفى '\n'  "+order.getId() ;
         msg+="تم شحنه وتكلفة الطلب هى "+ total_price;
 
 

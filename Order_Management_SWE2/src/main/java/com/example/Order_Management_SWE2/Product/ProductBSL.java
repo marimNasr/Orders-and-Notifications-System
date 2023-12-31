@@ -9,13 +9,15 @@ import java.util.Map;
 
 public class ProductBSL {
     String strProducts = "";
-    String header = "\nName\tPrice\tVendor\tCategory\tSubCategory\n";
     DataBase dataBase = new DataBase();
     List<Product> products = dataBase.getProducts();
-    Map<Product,Integer> productsMap = dataBase.getProductsMap();
+    Map<Product,Integer> productsMap;
 
-
+    public ProductBSL(){
+        productsMap= dataBase.getProductsMap();
+    }
     public String display(){
+        String header = "\nName\tPrice\tVendor\tCategory\tSubCategory\n";
         for(Product product : products){
             strProducts = strProducts + product.getName() + "\t" + product.getPrice() + " LE\t"
             + product.getVendor() + "\t" + product.getCategory()  + "\t" + product.getSubCategory()+"\n" ;
@@ -30,7 +32,7 @@ public class ProductBSL {
             if (product.getName().equals(ProductName)) {
                 SubCategory subCategory = product.getSubCategory();
                 if(quantity >= numOfProduct){
-                    entry.setValue(quantity - numOfProduct);
+                    productsMap.put(product,quantity-numOfProduct);
                     subCategory.setCounter(subCategory.getCounter() - numOfProduct);
                     return true;
                 }
@@ -48,5 +50,11 @@ public class ProductBSL {
             }
         }
         return null;
+    }
+
+    public void increaseQuantity(Product p,int q ){
+        int x =productsMap.get(p);
+        x+=q;
+        productsMap.put(p,x);
     }
 }

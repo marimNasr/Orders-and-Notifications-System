@@ -1,6 +1,5 @@
 package com.example.Order_Management_SWE2.MessageTemplate.Canclletion;
 
-import com.example.Order_Management_SWE2.Customer.model.Customer;
 import com.example.Order_Management_SWE2.order.CompundOrder.CompoundOrder;
 import com.example.Order_Management_SWE2.order.SimpleOrder.SimpleOrder;
 import com.example.Order_Management_SWE2.order.model.Order;
@@ -11,7 +10,7 @@ import java.util.Map;
 public class ArCancel extends CancelMessage{
     @Override
     public String SendM(Order order) { //cancel order
-        String orderID = Integer.toString(order.getID());
+        String orderID = Integer.toString(order.getId());
         String customerName = order.getUsername();
         String products = "";
         Map<String, Integer> items = order.getProducts();
@@ -41,7 +40,7 @@ public class ArCancel extends CancelMessage{
         return msg;
     }
     public  String SendMShipment(Order order){
-        String orderID = Integer.toString(order.getID());
+        String orderID = Integer.toString(order.getId());
         String customerName = order.getUsername();
         String msg;
         msg = "عزيزي, " + customerName + "شحن طلبك الذي رقمه التعريفي: " + orderID + " تم الغاءه";
