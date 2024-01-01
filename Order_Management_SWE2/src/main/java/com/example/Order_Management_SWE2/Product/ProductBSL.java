@@ -17,10 +17,10 @@ public class ProductBSL {
         productsMap= dataBase.getProductsMap();
     }
     public String display(){
-        String header = "\nName\tPrice\tVendor\tCategory\tSubCategory\n";
+        String header = "\nName\t\tPrice\t\tVendor\t\tCategory\t\tSubCategory\n";
         for(Product product : products){
-            strProducts = strProducts + product.getName() + "\t" + product.getPrice() + " LE\t"
-            + product.getVendor() + "\t" + product.getCategory()  + "\t" + product.getSubCategory()+"\n" ;
+            strProducts = strProducts + product.getName() + "\t\t" + product.getPrice() + " LE\t\t"
+            + product.getVendor() + "\t\t" + product.getCategory()  + "\t\t" + product.getSubCategory()+"\n" ;
         }
         return header + strProducts;
     }

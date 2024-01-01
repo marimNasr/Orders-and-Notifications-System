@@ -18,18 +18,29 @@ public class OrderController {
 
         return simpleOrderBSL.makeSimpleOrder(order);
     }
+
+
     @PostMapping("/compoundOrder")
     public String compoundOrder(@RequestBody CompoundOrder Order) {
 
         return CompOrderBSL.makeCompoundOrder(Order);
     }
 
-    @PostMapping("/cancelSimpleOrder/{orderId}")
-    public String cancelSimpleOrder(@PathVariable("orderId") int orderId) {
+    @PostMapping("/shipSimpleOrder/{orderId}")
+    public String shipSimpleOrder(@PathVariable("orderId") int orderId) {
 
+        return simpleOrderBSL.shipSimpleOrder(orderId);
+    }
+    @PostMapping("/shipCompoundOrder/{orderId}")
+    public String shipCompoundOrder(@PathVariable("orderId") int orderId) {
+        return CompOrderBSL.shipCompoundOrder(orderId);
+    }
+
+    @DeleteMapping("/cancelSimpleOrder/{orderId}")
+    public String cancelSimpleOrder(@PathVariable("orderId") int orderId) {
             return simpleOrderBSL.cancel(orderId);
     }
-    @PostMapping("/cancelCompoundOrder/{orderId}")
+    @DeleteMapping("/cancelCompoundOrder/{orderId}")
     public String cancelCompoundOrder(@PathVariable("orderId") int orderId) {
         return CompOrderBSL.cancel(orderId);
     }

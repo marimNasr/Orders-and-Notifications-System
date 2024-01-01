@@ -37,5 +37,8 @@ public class DatabaseController
             System.out.println(order.getUsername());
         }
     }
+    public void removeOrder(Order order){
+        orders.remove(order);
+    }
 
 }

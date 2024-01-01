@@ -1,6 +1,0 @@
-[ID]-[OrderProducts]-[Price]-[Fees]-[State]-[CustomerUserName]
-1020-TV,Table-13200-100-Shipped-AyaMohamed77
-2030-Dinning Table,TV,Vase-150-13900-Confirmed-KariemGamal33
-4060-Table,Boiler-1500-120-Hold-MariamNasr66
-5090-Bed,Fridge-19700-190-Confirmed-MariamNasr66
-7602-Bed,Fridge,Fan,Washing Machine-24900-400-KarinKheir88

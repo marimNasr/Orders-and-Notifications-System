@@ -1,4 +1,4 @@
-package com.example.Order_Management_SWE2.Notification;
+package com.example.Order_Management_SWE2.Notification.model;
 
 import com.example.Order_Management_SWE2.Customer.model.Customer;
 import com.example.Order_Management_SWE2.DataBase.DatabaseController;
@@ -13,7 +13,8 @@ import com.example.Order_Management_SWE2.order.model.Order;
 import com.example.Order_Management_SWE2.order.model.OrderState;
 
 public abstract class Notification {
-    public MessageTemplate msg;DatabaseController databaseController = new DatabaseController();
+    public MessageTemplate msg;
+    DatabaseController databaseController = new DatabaseController();
     public void determineType(Order order){
         Customer customer = databaseController.getUser(order.getUsername());
         if(order.getState()== OrderState.placed && customer.getLanguage().equals("En")){
@@ -28,7 +29,7 @@ public abstract class Notification {
         else {
             if(customer.getLanguage().equals("Ar")){
                 msg = new ArCancel();
-            }else{
+            }else if(customer.getLanguage().equals("En")){
                 msg = new EnCancel();
             }
         }

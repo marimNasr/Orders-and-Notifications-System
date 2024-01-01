@@ -3,15 +3,14 @@ import java.util.*;
 import com.example.Order_Management_SWE2.Customer.model.Customer;
 import com.example.Order_Management_SWE2.DataBase.DataBase;
 import com.example.Order_Management_SWE2.DataBase.DatabaseController;
-import com.example.Order_Management_SWE2.Notification.Notification;
-import com.example.Order_Management_SWE2.Notification.NotificationController;
+import com.example.Order_Management_SWE2.Notification.NotificationBSL;
 import com.example.Order_Management_SWE2.Payment.PaymentBSL;
 import com.example.Order_Management_SWE2.Product.ProductBSL;
 import com.example.Order_Management_SWE2.order.model.Order;
 import com.example.Order_Management_SWE2.order.model.OrderState;
 import org.springframework.stereotype.Service;
 import com.example.Order_Management_SWE2.Product.model.Product;
-import java.text.SimpleDateFormat;
+
 
 @Service
 public class SimpleOrderBSL {
@@ -20,13 +19,13 @@ public class SimpleOrderBSL {
     PaymentBSL paymentBSL = new PaymentBSL();
     Map<String, Integer> products = new HashMap<String, Integer>();
     DataBase dataBase = new DataBase();
-    NotificationController notificationController;
+    NotificationBSL notificationBSL;
     Map<Product,Integer> productsMap;
     List<Order> orders = dataBase.getOrders();
 
     public SimpleOrderBSL(){
         productsMap= dataBase.getProductsMap();
-        notificationController = new NotificationController();
+        notificationBSL = new NotificationBSL();
     }
    public String makeSimpleOrder(SimpleOrder order){
        boolean x = false;
@@ -46,21 +45,24 @@ public class SimpleOrderBSL {
             order.setState(OrderState.placed);
             DBController.addOrder(order);
             order.setPlaceTime();
-            System.out.println(order.getPlaceTime());
-            Timer timer = new Timer(true);
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    order.setState(OrderState.shipping);
-                    order.setShipTime();
-                    System.out.println("Order"+ " has been shipped.");
-                    timer.cancel();
-                }
-            }, 3000);
-            return notificationController.sendNotification(order);
+            notificationBSL.addNotification(order);
+
+            return "Order placed successfully";
         }
         return "Failed to make order";
    }
+
+   public String shipSimpleOrder(int orderId){
+       SimpleOrder order = (SimpleOrder) DBController.getOrder(orderId);
+       if(order==null){
+           return "order is not found or being canceled";
+       }
+       order.setState(OrderState.shipping);
+       order.setShipTime();
+       notificationBSL.addNotification(order);
+       return "Order is shipping";
+   }
+
 
    public void cancelPlacement(SimpleOrder order){
        products =  order.getProducts();
@@ -69,8 +71,6 @@ public class SimpleOrderBSL {
             product.getSubCategory().setCounter(product.getSubCategory().getCounter() + entry.getValue());
             productBSL.increaseQuantity(product,entry.getValue());
        }
-
-
        float price = order.getPrice();
        float fees = order.getFees();
        String name = order.getUsername();
@@ -90,18 +90,18 @@ public class SimpleOrderBSL {
    public String cancel(int  orderId){
        SimpleOrder order = (SimpleOrder) DBController.getOrder(orderId);
        long currentTime = System.currentTimeMillis();
-       long elapsedTime = currentTime - order.getPlaceTime();
-       long placeCancellationTime = 120000; // 2 minute in milliseconds
 
-
-       if (elapsedTime <= placeCancellationTime) {
+       if (order.getState()==OrderState.placed){
+           order.setState(OrderState.placementcancelled);
+           notificationBSL.addNotification(order);
            cancelPlacement(order);
            return "Order Placement cancelled successfully";
-       }
-       if(order.getState()==OrderState.shipping){
+       }else if(order.getState()==OrderState.shipping){
            long elapsedTime2 = currentTime - order.getShipTime();
-           long shipCancellationTime = 60000; // 2 minute in milliseconds
+           long shipCancellationTime = 60000;
            if(elapsedTime2 <= shipCancellationTime){
+               order.setState(OrderState.shippingcancelled);
+               notificationBSL.addNotification(order);
                cancelShipment(order);
                return "Order Shipment cancelled successfully";
            }

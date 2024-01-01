@@ -23,11 +23,6 @@ public class ArPlaceMessage extends PlaceMessage {
         msg = msg+ "بنجاح ";
         msg = msg + "ويحمل الرقم التعريفي ";
         msg = msg + order.getId();
-        if (order instanceof CompoundOrder) {
-            for (Order o : ((CompoundOrder) order).getOrders()) {
-                 msg+="\n"+createMessages(o);
-            }
-        }
         return msg;
     }
 

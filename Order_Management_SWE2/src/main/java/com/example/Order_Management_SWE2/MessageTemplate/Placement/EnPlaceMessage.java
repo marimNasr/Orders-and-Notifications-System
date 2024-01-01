@@ -7,10 +7,6 @@ import java.util.*;
 
 public class EnPlaceMessage extends PlaceMessage {
     @Override
-
-
-
-
     public String createMessages(Order order) {
         msg ="";
         msg = msg + "Dear ' " + order.getUsername() + " '\nYour booking of the Item (s) : {\n";
@@ -21,11 +17,6 @@ public class EnPlaceMessage extends PlaceMessage {
             products = products + item.getKey() + " Product which you purchased " + Integer.toString(item.getValue()) + " Pieces of it \n";
         }
         msg = msg + products + "}  Have been confirmed";
-        if (order instanceof CompoundOrder) {
-            for (Order o : ((CompoundOrder) order).getOrders()) {
-                msg += "\n"+ createMessages(o);
-            }
-        }
         return msg;
     }
 

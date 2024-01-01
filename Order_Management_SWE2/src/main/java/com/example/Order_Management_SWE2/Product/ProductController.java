@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class ProductController {
     ProductBSL productBSL = new ProductBSL();
-
     String listOfProducts = productBSL.display();
 
     public String getListOfProducts() {

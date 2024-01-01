@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class DataBase {
    private static List<Customer> customers = new ArrayList<Customer>();
-   private List<Order> orders = new ArrayList<Order>();
+   private static List<Order> orders = new ArrayList<Order>();
    private List<Product> products= new ArrayList<Product>();
    // get prducts map
    @Getter
@@ -52,9 +52,6 @@ public class DataBase {
       order.add(new SimpleOrder(234,"AyaMohamed77",product,3100,150));
       orders.add(new CompoundOrder(459,"KariemGamal33",product,3100,150,order));
 
-//      orders.add(new SimpleOrder("KariemGamal33",products3,4000,"Hold",120));
-//      orders.add(new SimpleOrder("FadyHany44",products3,7100,"Confirmed",190));
-//      orders.add(new SimpleOrder("KarinKheir88",products4,24900,"Shipped",400));
    }
 
    public List<Customer> getCustomers() {

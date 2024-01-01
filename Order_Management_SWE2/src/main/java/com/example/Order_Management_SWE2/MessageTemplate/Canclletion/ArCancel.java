@@ -23,7 +23,7 @@ public class ArCancel extends CancelMessage{
         if(order instanceof CompoundOrder) {
             List<SimpleOrder> orders = ((CompoundOrder) order).getOrders();
             String otherCustomerName;
-            for(SimpleOrder order1 : orders){
+            for(Order order1 : orders){
                 otherCustomerName = order1.getUsername();
                 products = products + " و طلب " + otherCustomerName + " مكوناته:\n";
 
@@ -39,7 +39,7 @@ public class ArCancel extends CancelMessage{
                 + products + " تم الغاءه";
         return msg;
     }
-    public  String SendMShipment(Order order){
+    public  String createShipmentMessage(Order order){
         String orderID = Integer.toString(order.getId());
         String customerName = order.getUsername();
         String msg;

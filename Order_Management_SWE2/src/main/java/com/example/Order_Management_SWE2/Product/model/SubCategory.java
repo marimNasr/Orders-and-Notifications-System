@@ -12,7 +12,6 @@ public enum SubCategory {
     SubCategory(String displayName, int count) {
         this.subCategoryName = displayName;
         this.counter = count;
-//        sub.add(this);
     }
     public int getCounter() {
         return counter;
